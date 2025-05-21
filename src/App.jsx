@@ -5,7 +5,7 @@ import { Routes, Route } from "react-router-dom";
 import Homepage from "./pages/Homepage";
 import AuthPage from "./pages/AuthPage";
 import CreateForm from "./pages/CreateForm";
-import Dashboard from "./pages/Dashboard";
+import Dashboard from "./pages/DexSearch";
 import ShowOnePage from "./pages/ShowOnePage";
 import NotFound from "./pages/NotFound";
 

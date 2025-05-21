@@ -9,13 +9,7 @@ export default function Nav() {
           <Link to="/">HomePage</Link>
         </li>
         <li>
-          <Link to="/dashboard">Dashboard</Link>
-        </li>
-        <li>
-          <Link to="/create">Create Form</Link>
-        </li>
-        <li>
-          <Link to="/auth">SignIn/SignUp</Link>
+          <Link to="/dashboard">Dex Search</Link>
         </li>
       </ul>
     </nav>
