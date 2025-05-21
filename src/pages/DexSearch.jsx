@@ -3,15 +3,17 @@ import React, { useEffect, useState } from "react";
 export default function PokemonSearchPage() {
   const [allPokemon, setAllPokemon] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [dexEntry, setDexEntry] = useState({});
 
   useEffect(() => {
     async function fetchPokemon() {
       try {
+        //fetches the first 151 pokemon (all first gen pokemon)
         const res = await fetch("https://pokeapi.co/api/v2/pokemon?limit=151");
         const data = await res.json();
         setAllPokemon(data.results);
       } catch (error) {
-        console.error("Error fetching Pokémon:", error);
+        console.error("Error fetching Pokémon data: ", error);
       }
     }
 
@@ -30,7 +32,7 @@ export default function PokemonSearchPage() {
 
   return (
     <div className="pokemon-page">
-      <h1>Pokémon World!</h1>
+      <h1>Pokedex Entry Search!</h1>
 
       <div className="search">
         <input
