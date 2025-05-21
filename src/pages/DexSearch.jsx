@@ -18,7 +18,7 @@ export default function PokemonSearchPage() {
           const id = getPokemonId(pokemon.url);
           const speciesRes = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${id}`);       
           const speciesData = await speciesRes.json();
-          const engishDex = speciesData.flavor_text_entries.find(
+          const englishDex = speciesData.flavor_text_entries.find(
             entry => entry.language.name === "en"
           );
           const readyDex = englishDex ? englishDex.flavor_text.replace(/\f/g, " ") : "No entry found.";
@@ -40,9 +40,11 @@ export default function PokemonSearchPage() {
     fetchPokemon();
   }, []);
 
-  const filteredPokemon = allPokemon.filter((pokemon) =>
-    pokemon.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filteredPokemon = allPokemon.filter((pokemon) => {
+    const id = getPokemonId(pokemon.url);
+    const entry = dexEntry[id];
+    return entry.toLowerCase().includes(searchTerm.toLowerCase());
+ });
 
   //retrieves each specific pokemon ID
   const getPokemonId = (url) => {
@@ -67,7 +69,7 @@ export default function PokemonSearchPage() {
         {filteredPokemon.map((pokemon) => {
           const id = getPokemonId(pokemon.url);
           const imageUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
-          const pokedexEntry = dexEntry[id];
+          const pokedexEntry = dexEntry[id] || "Loading...";
 
           return (
             <div key={pokemon.name} className="pokemon-card text-center p-2 border rounded shadow">
