@@ -40,17 +40,17 @@ export default function PokemonSearchPage() {
     fetchPokemon();
   }, []);
 
-  const filteredPokemon = allPokemon.filter((pokemon) => {
-    const id = getPokemonId(pokemon.url);
-    const entry = dexEntry[id];
-    return entry.toLowerCase().includes(searchTerm.toLowerCase());
- });
-
   //retrieves each specific pokemon ID
   const getPokemonId = (url) => {
     const pokemonId = url.split("/").filter(Boolean);
     return pokemonId[pokemonId.length - 1]; 
   };
+
+    const filteredPokemon = allPokemon.filter((pokemon) => {
+    const id = getPokemonId(pokemon.url);
+    const entry = dexEntry[id] || "";
+    return entry.toLowerCase().includes(searchTerm.toLowerCase());
+ });
 
   return (
     <div className="pokemon-page">
@@ -74,8 +74,8 @@ export default function PokemonSearchPage() {
           return (
             <div key={pokemon.name} className="pokemon-card text-center p-2 border rounded shadow">
               <img src={imageUrl} alt={pokemon.name} className="mx-auto" />
-              <p className="capitalize">{pokemon.name}</p>
-              <p className="text-sm italic">{pokedexEntry}</p>
+              <p className="pokemon name">{pokemon.name}</p>
+              <p className="pokedex entry">{pokedexEntry}</p>
             </div>
           );
         })}
