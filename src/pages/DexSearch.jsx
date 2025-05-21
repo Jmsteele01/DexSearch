@@ -12,6 +12,26 @@ export default function PokemonSearchPage() {
         const res = await fetch("https://pokeapi.co/api/v2/pokemon?limit=151");
         const data = await res.json();
         setAllPokemon(data.results);
+
+        //fetches the flavor text for the 151 pokemon
+        const dexPromises = data.results.map(async (pokemon) => {
+          const id = getPokemonId(pokemon.url);
+          const speciesRes = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${id}`);       
+          const speciesData = await speciesRes.json();
+          const engishDex = speciesData.flavor_text_entries.find(
+            entry => entry.language.name === "en"
+          );
+          const readyDex = englishDex ? englishDex.flavor_text.replace(/\f/g, " ") : "No entry found.";
+          return { id, pokedexEntry: readyDex }; 
+        });
+
+        const dexEntries = await Promise.all(dexPromises);
+        const dexMap = {};
+        dexEntries.forEach(({id, pokedexEntry}) => {
+          dexMap[id] = pokedexEntry;
+        })
+        setDexEntry(dexMap);
+
       } catch (error) {
         console.error("Error fetching Pokémon data: ", error);
       }
@@ -39,7 +59,7 @@ export default function PokemonSearchPage() {
           type="text"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          placeholder="Search Pokémon..."
+          placeholder="Search Dex Entries..."
         />
       </div>
 
@@ -47,11 +67,13 @@ export default function PokemonSearchPage() {
         {filteredPokemon.map((pokemon) => {
           const id = getPokemonId(pokemon.url);
           const imageUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
+          const pokedexEntry = dexEntry[id];
 
           return (
             <div key={pokemon.name} className="pokemon-card text-center p-2 border rounded shadow">
               <img src={imageUrl} alt={pokemon.name} className="mx-auto" />
               <p className="capitalize">{pokemon.name}</p>
+              <p className="text-sm italic">{pokedexEntry}</p>
             </div>
           );
         })}
