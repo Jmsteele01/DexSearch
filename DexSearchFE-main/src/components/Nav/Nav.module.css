@@ -1,0 +1,10 @@
+.mainNav > ul {
+  display: flex;
+  justify-content: space-between;
+  list-style-type: none;
+  padding: 0;
+}
+
+.mainNav > ul > li > a {
+  text-decoration: none;
+}
