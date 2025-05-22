@@ -22,7 +22,7 @@ export default function PokemonSearchPage() {
           const englishDex = speciesData.flavor_text_entries.find(
             entry => entry.language.name === "en"
           );
-          const readyDex = englishDex ? englishDex.flavor_text.replace(/\f/g, " ") : "No entry found.";
+          const readyDex = englishDex ? englishDex.flavor_text.replace(/\f/g, " ") : "No data on this Pokemon!";
           return { id, pokedexEntry: readyDex }; 
         });
 

@@ -1,8 +1,13 @@
+import "./Homepage.css";
+import dex from "../assets/Dex.png";
+
+
 export default function Homepage() {
   return (
-    <>
-  <h1>HomePage</h1>
-<p>This website is a search tool to search pokemon by their Pokedex entries</p>
-</>
+    <div>
+  <h1>Pokedex Searcher</h1>
+  <p>This website is a search tool to search for terms written in a Pokemon's original Pokedex entry.</p>
+  <img src={dex}></img>
+</div>
 );
 }
