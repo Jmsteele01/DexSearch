@@ -6,7 +6,7 @@ export default function Homepage() {
   return (
     <div>
   <h1>Pokedex Searcher</h1>
-  <p>This website is a search tool to search for terms written in a Pokemon's original Pokedex entry.</p>
+  <p>This website is a search tool to find terms written in a Pokemon's original Pokedex entry.</p>
   <img src={dex}></img>
 </div>
 );
