@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import "./DexSearch.css"
 
 export default function PokemonSearchPage() {
   const [allPokemon, setAllPokemon] = useState([]);
@@ -53,7 +54,7 @@ export default function PokemonSearchPage() {
  });
 
   return (
-    <div className="pokemon-page">
+    <div className="Dex-search-page">
       <h1>Pokedex Entry Search!</h1>
 
       <div className="search">
@@ -65,17 +66,17 @@ export default function PokemonSearchPage() {
         />
       </div>
 
-      <div className="results grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 p-4">
+      <div className="results">
         {filteredPokemon.map((pokemon) => {
           const id = getPokemonId(pokemon.url);
           const imageUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
           const pokedexEntry = dexEntry[id] || "Loading...";
 
           return (
-            <div key={pokemon.name} className="pokemon-card text-center p-2 border rounded shadow">
+            <div key={pokemon.name} className="pokemon_results">
               <img src={imageUrl} alt={pokemon.name} className="mx-auto" />
-              <p className="pokemon name">{pokemon.name}</p>
-              <p className="pokedex entry">{pokedexEntry}</p>
+              <p1 className="pokemon_name">{pokemon.name+":"}</p1>
+              <p2 className="pokedex_entry">{pokedexEntry}</p2>
             </div>
           );
         })}

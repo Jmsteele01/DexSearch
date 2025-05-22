@@ -1,0 +1,28 @@
+.pokemon_name{
+    font-size: larger;
+    font-weight: bold;
+    line-height: 0%;
+}
+
+.pokedex_entry{
+    font-size: large;
+    font-style: italic;
+    margin-left: 0.1cm;
+}
+
+.pokemon_results{
+    background-color: lightgray;
+    display: flex;
+    align-items: center;
+}
+
+input{
+    display: flex;
+    font-size: xx-large;
+    justify-self: center;
+}
+
+h1{
+    text-align: center;
+    font-size: 1.5cm;
+}
